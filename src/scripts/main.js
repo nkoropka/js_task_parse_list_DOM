@@ -21,7 +21,10 @@ function getEmployees(list) {
   const items = Array.from(list.querySelectorAll('li'));
 
   return items.map((item) => {
-    const employeeName = item.childNodes[0].textContent.trim();
+    const nameElement = item.querySelector('.name');
+    const employeeName = nameElement
+      ? nameElement.textContent.trim()
+      : item.textContent.trim();
 
     return {
       name: employeeName,
@@ -34,6 +37,9 @@ function getEmployees(list) {
 
 const employeeList = document.querySelector('ul');
 
-sortList(employeeList);
+if (employeeList) {
+  sortList(employeeList);
+}
 
-getEmployees(employeeList);
+// eslint-disable-next-line no-unused-vars
+const employees = getEmployees(employeeList);
